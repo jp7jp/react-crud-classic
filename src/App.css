@@ -1,0 +1,55 @@
+.App {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 20px;
+}
+
+table, th, td {
+  border: 1px solid;
+  text-align: left;
+}
+
+th, td {
+  padding: 5px;
+}
+
+.App-header {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.link-menu {
+  display: solid;
+  color: white;
+  background: blue;
+  padding: 5px 15px;
+}
+
+.component {
+  border: 1px solid #ccc;
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+}
+
+.row {
+  clear: both;
+}
+
+.col {
+  width: 33%;
+  float: left;
+}
