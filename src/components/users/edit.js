@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUser, updateUser } from '../actions';
-import UserForm from './user-form';
+import { getUser, updateUser } from '../../actions';
+import UsersForm from './form';
 
 class UserEdit extends Component {
 
@@ -28,7 +28,7 @@ class UserEdit extends Component {
       return <div>Loading...</div>
     }
     return (
-      <UserForm
+      <UsersForm
         header='Edit User'
         onSubmit={this.handleSubmit.bind(this)}
         initialValues={this.props.user}

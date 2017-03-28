@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 
-class UserForm extends Component {
+class UsersForm extends Component {
 
   render() {
-    const { header, handleSubmit, pristine, submitting } = this.props;
+    const { header, handleSubmit, pristine, submitting, userError, finished } = this.props;
 
-    if (this.props.finished) {
+    if (finished) {
       return <Redirect to="/users" />
     }
 
@@ -16,9 +16,11 @@ class UserForm extends Component {
       <div className="component">
         <h3>{header}</h3>
         <form onSubmit={handleSubmit}>
-          Error: {this.props.userError || 'No errors'}<br />
-          E-Mail: <Field name="email" component="input" type="text" /><br />
-          Password: <Field name="password" component="input" type="text" /><br />
+          Error: {userError || 'No errors'}<br />
+          <label>Email:</label>
+          <Field name="email" component="input" type="text" /><br />
+          <label>Password:</label>
+          <Field name="password" component="input" type="text" /><br />
           <button type="submit" disabled={pristine || submitting}>Submit</button>
         </form>
       </div>
@@ -28,4 +30,4 @@ class UserForm extends Component {
 
 export default connect()(reduxForm({
   form: 'user'
-})(UserForm));
+})(UsersForm));

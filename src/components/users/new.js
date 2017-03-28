@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createUser } from '../actions';
-import UserForm from './user-form';
+import { createUser } from '../../actions';
+import UsersForm from './form';
 
-class UserCreate extends Component {
+class UsersNew extends Component {
 
   state = {
     finished: false
@@ -21,8 +21,8 @@ class UserCreate extends Component {
 
   render() {
     return (
-      <UserForm
-        header='New User'
+      <UsersForm
+        header='Create User'
         onSubmit={this.handleSubmit.bind(this)}
         userError={this.props.userError}
         finished={this.state.finished}
@@ -38,4 +38,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { createUser })(UserCreate);
+export default connect(mapStateToProps, { createUser })(UsersNew);

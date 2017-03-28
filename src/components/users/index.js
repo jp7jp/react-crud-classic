@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllUsers, deleteUser } from '../actions';
+import { getAllUsers, deleteUser } from '../../actions';
 
-class Users extends Component {
+class UsersIndex extends Component {
 
   componentWillMount() {
     this.props.getAllUsers();
@@ -32,8 +32,8 @@ class Users extends Component {
       return <div>Loading...</div>
     }
     return (
-      <div>
-        <Link to="/users/new">Create User</Link>
+      <div className="component">
+        <h3>List Users</h3>
         <table>
           <thead>
             <tr>
@@ -59,4 +59,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { getAllUsers, deleteUser })(Users);
+export default connect(mapStateToProps, { getAllUsers, deleteUser })(UsersIndex);

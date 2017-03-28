@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUser } from '../actions';
+import { getUser } from '../../actions';
 
-class User extends Component {
+class UsersShow extends Component {
 
   componentWillMount(nextProps) {
     this.props.getUser(this.props.match.params.id);
@@ -36,4 +36,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { getUser })(User);
+export default connect(mapStateToProps, { getUser })(UsersShow);
