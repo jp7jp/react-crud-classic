@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getUser } from '../../actions';
 
 class UsersShow extends Component {
@@ -16,7 +17,7 @@ class UsersShow extends Component {
       return <div>Loading...</div>
     }
     return (
-      <div className="component">
+      <div className="well">
         <h3>Show User</h3>
         <dl key={this.props.match.params.id}>
           <dt>Email:</dt>
@@ -24,6 +25,7 @@ class UsersShow extends Component {
           <dt>Password:</dt>
           <dd>{ this.props.user.password }</dd>
         </dl>
+        <Link to={`/users`}>Cancel / Go Back</Link>
       </div>
     );
   }

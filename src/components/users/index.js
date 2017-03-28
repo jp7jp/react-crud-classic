@@ -16,10 +16,9 @@ class UsersIndex extends Component {
   renderRow(user) {
     return (
       <tr key={user._id}>
-        <td><Link to={`/users/${user._id}`}>Show</Link></td>
-        <td><Link to={`/users/${user._id}/edit`}>Edit</Link></td>
-        <td><span onClick={() => this.handleRemoveClick(user._id)}>Delete</span></td>
-        <td>{user.email}</td>
+        <td><Link to={`/users/${user._id}/edit`} className="btn btn-primary">Edit</Link></td>
+        <td><span onClick={() => this.handleRemoveClick(user._id)} className="btn btn-danger">X</span></td>
+        <td width="99%"><Link to={`/users/${user._id}`}>{user.email}</Link></td>
       </tr>
     )
   }
@@ -32,15 +31,14 @@ class UsersIndex extends Component {
       return <div>Loading...</div>
     }
     return (
-      <div className="component">
+      <div className="well">
         <h3>List Users</h3>
-        <table>
+        <table className="table">
           <thead>
             <tr>
-              <td>Show</td>
-              <td>Edit</td>
-              <td>Delete</td>
-              <td>User</td>
+              <th>Edit</th>
+              <th>Delete</th>
+              <th>User</th>
             </tr>
           </thead>
           <tbody>

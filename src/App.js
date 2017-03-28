@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Routes from './routes';
-import './App.css';
+import './styles/App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Users CRUD</h2>
-        </div>
-        <div className="navbar">
-          <Link to="/users" className="link-menu">List Users</Link>
-          <Link to="/users/new" className="link-menu">Create User</Link>
+      <div className="container">
+        <div className="header clearfix">
+          <h3 className="text-muted pull-left">React CRUD Classic</h3>
+          <div className="btn-group pull-right">
+            <Link to="/users" className="btn btn-default">List Users</Link>
+            <Link to="/users/new" className="btn btn-primary">Create User</Link>
+          </div>
         </div>
         <Routes />
       </div>
