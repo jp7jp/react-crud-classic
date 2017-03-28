@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUser, updateUser } from '../actions';
+import { createUser } from '../actions';
 import UserForm from './user-form';
 
-class UserEdit extends Component {
+class UserCreate extends Component {
 
   state = {
     finished: false
   }
 
-  componentWillMount() {
-    this.props.getUser(this.props.match.params.id);
-  }
-
   handleSubmit(values) {
-    this.props.updateUser(this.props.user._id, values).then(() => {
+    this.props.createUser(values).then(() => {
       if (!this.props.userError) {
         this.setState({
           finished: true
@@ -24,14 +20,10 @@ class UserEdit extends Component {
   }
 
   render() {
-    if (!this.props.user) {
-      return <div>Loading...</div>
-    }
     return (
       <UserForm
-        header='Edit User'
+        header='New User'
         onSubmit={this.handleSubmit.bind(this)}
-        initialValues={this.props.user}
         userError={this.props.userError}
         finished={this.state.finished}
       />
@@ -41,9 +33,9 @@ class UserEdit extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.users.user,
+    newUser: state.users.newUser,
     userError: state.users.error
   }
 }
 
-export default connect(mapStateToProps, { getUser, updateUser })(UserEdit);
+export default connect(mapStateToProps, { createUser })(UserCreate);
