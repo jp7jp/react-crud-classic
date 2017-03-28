@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 import Users from './components/users';
 import User from './components/user';
 import UserForm from './components/user-form';
@@ -14,18 +14,12 @@ class App extends Component {
           <h2>Users CRUD</h2>
         </div>
         <Link to="/users" className="link-menu">Users</Link>
-        <div className="row">
-          <div className="col">
-            <Route path="/users" component={Users} />
-          </div>
-          <div className="col">
-            <Route path="/users/:id" component={User} />
-          </div>
-          <div className="col">
-            <UserForm />
-            <Route path="/users/:id/edit" component={UserEdit} />
-          </div>
-        </div>
+        <Switch>
+          <Route exact path="/users" component={Users} />
+          <Route exact path="/users/new" component={UserForm} />
+          <Route exact path="/users/:id" component={User} />
+          <Route exact path="/users/:id/edit" component={UserEdit} />
+        </Switch>
       </div>
     );
   }

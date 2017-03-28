@@ -4,14 +4,15 @@ import { getUser } from '../actions';
 
 class User extends Component {
 
-  componentWillUpdate(nextProps) {
-    if (!this.props.users.user || (this.props.users.user._id !== nextProps.match.params.id)) {
-      this.props.getUser(nextProps.match.params.id);
-    }
+  componentWillMount(nextProps) {
+    this.props.getUser(this.props.match.params.id);
   }
 
   render() {
-    if(!this.props.users.user) {
+    if(this.props.error) {
+      return <div>{this.props.error}</div>
+    }
+    if(!this.props.user) {
       return <div>Loading...</div>
     }
     return (
@@ -19,9 +20,9 @@ class User extends Component {
         <h3>Show User</h3>
         <dl key={this.props.match.params.id}>
           <dt>Email:</dt>
-          <dd>{ this.props.users.user.email }</dd>
+          <dd>{ this.props.user.email }</dd>
           <dt>Password:</dt>
-          <dd>{ this.props.users.user.password }</dd>
+          <dd>{ this.props.user.password }</dd>
         </dl>
       </div>
     );
@@ -30,7 +31,8 @@ class User extends Component {
 
 function mapStateToProps(state) {
   return {
-    users: state.users
+    user: state.users.user,
+    error: state.users.error
   }
 }
 

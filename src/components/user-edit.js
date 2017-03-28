@@ -1,33 +1,36 @@
 import React, { Component } from 'react';
-import { editUser, updateUser } from '../actions';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { getUser, updateUser } from '../actions';
 
 class UserEdit extends Component {
 
-  updateUser(userId) {
-    if (!this.props.editedUser || (this.props.editedUser._id !== userId)) {
-      this.props.editUser(userId).then((user) => {
-        this.props.initialize(this.props.editedUser);
-      });
-    }
-  }
-
-  componentWillUpdate(nextProps) {
-    this.updateUser(nextProps.match.params.id);
+  state = {
+    finished: false
   }
 
   componentWillMount() {
-    this.updateUser(this.props.match.params.id);
+    this.props.getUser(this.props.match.params.id).then((user) => {
+      this.props.initialize(this.props.user);
+    });
   }
 
   handleOnSubmit(values) {
-    this.props.updateUser(this.props.editedUser._id, values);
-    //this.props.reset();
+    this.props.updateUser(this.props.user._id, values).then(() => {
+      if (!this.props.userError) {
+        this.setState({
+          finished: true
+        });
+      }
+    });
   }
 
   render() {
     const { handleSubmit, pristine, submitting } = this.props;
+    if (this.state.finished) {
+      return <Redirect to="/users" />
+    }
     return (
       <div className="component">
         <h3>Edit User</h3>
@@ -44,11 +47,11 @@ class UserEdit extends Component {
 
 function mapStateToProps(state) {
   return {
-    editedUser: state.users.editedUser,
+    user: state.users.user,
     userError: state.users.error
   }
 }
 
-export default connect(mapStateToProps, { editUser, updateUser })(reduxForm({
+export default connect(mapStateToProps, { getUser, updateUser })(reduxForm({
   form: 'editUserForm'
 })(UserEdit));

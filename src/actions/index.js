@@ -1,17 +1,16 @@
 import axios from 'axios';
 
-export const GET_USERS = 'GET_USERS';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const GET_USER = 'GET_USER';
 export const CREATE_USER = 'CREATE_USER';
-export const EDIT_USER = 'EDIT_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
 
-export const getUsers = () => {
+export const getAllUsers = () => {
   const request = axios.get('http://localhost:3001/users');
 
   return {
-    type: GET_USERS,
+    type: GET_ALL_USERS,
     payload: request
   }
 }
@@ -30,15 +29,6 @@ export const createUser = (user) => {
 
   return {
     type: CREATE_USER,
-    payload: request
-  }
-}
-
-export const editUser = (id) => {
-  const request = axios.get(`http://localhost:3001/users/${id}`);
-
-  return {
-    type: EDIT_USER,
     payload: request
   }
 }

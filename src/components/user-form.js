@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
-import { createUser } from '../actions';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { createUser } from '../actions';
 
 class UserForm extends Component {
 
+  state = {
+    finished: false
+  }
+
   handleOnSubmit(values) {
-    this.props.createUser(values);
-    this.props.reset();
+    this.props.createUser(values).then(() => {
+      if (!this.props.userError) {
+        this.setState({
+          finished: true
+        });
+      }
+    });
   }
 
   render() {
     const { handleSubmit, pristine, submitting } = this.props;
+
+    if (this.state.finished) {
+      return <Redirect to="/users" />
+    }
 
     return (
       <div className="component">
@@ -35,5 +49,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { createUser })(reduxForm({
-  form: 'createUser'
+  form: 'createUserForm'
 })(UserForm));
